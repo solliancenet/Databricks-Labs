@@ -14,7 +14,7 @@ Follow the steps in this section to setup your environment to complete the labs.
 
 AdventureWorks is an e-commerce retailer who is looking to improve how they manage the data assets produced by their platform. As a starting point they would like collect their data in a manner that enables easier exploration and prepares the data for downstream analytics processes that can yield new insights. AdventureWorks has asked you to process and prepare their flat file data for weblogs, users, and products into a tabular format that offers better query performance and can be queried using SQL.
 
-In the lab you will learn how to use Spark SQL (and PySpark), along with Azure Data Factory (ADF), to batch process a 10GB text file dataset, quickly explore its content, identify issues with the data, clean and format the data and load it into Hive tables to support downstream analytics.
+In the lab you will learn how to use Spark SQL (and PySpark) to batch process a 10GB text file dataset, quickly explore its content, identify issues with the data, clean and format the data and load it into global tables to support downstream analytics. You will also learn how to automate these steps using Azure Data Factory (ADF), and a Databricks Notebook activity.
 
 ### [Lab 2 - Data Warehouse / Interactive Pattern - Interactive Querying with Spark, LLAP and Power BI](Labs/Lab02/Lab02.md)
 
