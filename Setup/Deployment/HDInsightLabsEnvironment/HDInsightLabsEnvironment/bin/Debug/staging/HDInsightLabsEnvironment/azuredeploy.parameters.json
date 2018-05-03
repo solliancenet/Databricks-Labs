@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "clusterName": {
+      "value": "hdilabs20170914ignite01"
+    },
+    "clusterLoginUserName": {
+      "value": "admin"
+    },
+    "clusterLoginPassword": {
+      "value": "Abc!1234567890"
+    },
+    "location": {
+      "value": "westus2"
+    },
+    "clusterWorkerNodeCount": {
+      "value": 2
+    },
+    "clusterKind": {
+      "value": "SPARK"
+    },
+    "clusterVersion": {
+      "value": "3.6"
+    },
+    "sshUserName": {
+      "value": "sshuser"
+    },
+    "sshPassword": {
+      "value": "Abc!1234567890"
+    }
+  }
+}
