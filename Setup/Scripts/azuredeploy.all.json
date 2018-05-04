@@ -477,16 +477,16 @@
       "[concat('Microsoft.DataFactory/factories/', variables('dataFactoryName'))]",
     "RetailData_BlobStorage_SasUri":
       "https://retaildatasamples.blob.core.windows.net/data?sv=2017-07-29&sr=c&sig=0%2FdYdx%2FW1X8EbO6GpH0R4ZEBrAUkYWqk2uz%2Fym5w3Gg%3D&st=2018-04-01T00%3A00%3A00Z&se=2099-12-31T12%3A59%3A59Z&sp=rl",
-    "retailData_folderPath": "data/retaildata/rawdata/",
+    "retailData_folderPath": "/retaildata/rawdata/",
     "retailData_weblogs_folderPath":
       "[concat(variables('retailData_folderPath'), 'weblognew')]",
     "retailData_users_folderPath":
       "[concat(variables('retailData_folderPath'), 'UserFile')]",
     "retailData_products_folderPath":
       "[concat(variables('retailData_folderPath'), 'ProductFile')]",
-    "weblogsDestinationPath": "data/weblogs/",
-    "usersDestinationPath": "data/users/",
-    "productsDestinationPath": "data/products/",
+    "weblogsDestinationPath": "/weblogs/",
+    "usersDestinationPath": "/users/",
+    "productsDestinationPath": "/products/",
     "fileName": "part*.csv"
   },
   "resources": [
@@ -835,7 +835,8 @@
             "treatEmptyAsNull": true,
             "firstRowAsHeader": true
           },
-          "folderPath": "[variables('retaildata_weblogs_folderPath')]"
+          "folderPath":
+            "[concat(variables('clusterAttachedStorageName') ,copyIndex(), variables('retaildata_weblogs_folderPath'))]"
         }
       },
       "dependsOn": [
@@ -906,7 +907,8 @@
             "treatEmptyAsNull": true,
             "firstRowAsHeader": true
           },
-          "folderPath": "[variables('weblogsDestinationPath')]"
+          "folderPath":
+            "[concat(variables('clusterAttachedStorageName') ,copyIndex(), variables('weblogsDestinationPath'))]"
         }
       },
       "dependsOn": [
@@ -938,7 +940,8 @@
             "firstRowAsHeader": false
           },
           "fileName": "[variables('fileName')]",
-          "folderPath": "[variables('retaildata_users_folderPath')]"
+          "folderPath":
+            "[concat(variables('clusterAttachedStorageName') ,copyIndex(), variables('retaildata_users_folderPath'))]"
         }
       },
       "dependsOn": [
@@ -1001,7 +1004,8 @@
             "firstRowAsHeader": false
           },
           "fileName": "[variables('fileName')]",
-          "folderPath": "[variables('retaildata_products_folderPath')]"
+          "folderPath":
+            "[concat(variables('clusterAttachedStorageName') ,copyIndex(), variables('retaildata_products_folderPath'))]"
         }
       },
       "dependsOn": [
