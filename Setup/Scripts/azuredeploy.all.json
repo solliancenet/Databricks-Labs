@@ -1,5 +1,6 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema":
+    "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "clusterAttachedStorageType": {
@@ -16,21 +17,16 @@
     "provisionSpark": {
       "type": "string",
       "defaultValue": "Yes",
-      "allowedValues": [
-        "Yes",
-        "No"
-      ],
+      "allowedValues": ["Yes", "No"],
       "metadata": {
-        "description": "Specifies whether to provision an Azure Databricks Spark workspace."
+        "description":
+          "Specifies whether to provision an Azure Databricks Spark workspace."
       }
     },
     "provisionLLAP": {
       "type": "string",
       "defaultValue": "Yes",
-      "allowedValues": [
-        "Yes",
-        "No"
-      ],
+      "allowedValues": ["Yes", "No"],
       "metadata": {
         "description": "Specifies whether to provision an LLAP cluster."
       }
@@ -38,10 +34,7 @@
     "provisionKafka": {
       "type": "string",
       "defaultValue": "Yes",
-      "allowedValues": [
-        "Yes",
-        "No"
-      ],
+      "allowedValues": ["Yes", "No"],
       "metadata": {
         "description": "Specifies whether to provision a Kafka cluster."
       }
@@ -49,10 +42,7 @@
     "provisionSecure": {
       "type": "string",
       "defaultValue": "Yes",
-      "allowedValues": [
-        "Yes",
-        "No"
-      ],
+      "allowedValues": ["Yes", "No"],
       "metadata": {
         "description": "Specifies whether to provision a Secured cluster."
       }
@@ -60,16 +50,14 @@
     "clusterName": {
       "type": "string",
       "metadata": {
-        "description": "The name of the Azure Databricks workspace and/or HDInsight cluster to create."
+        "description":
+          "The name of the Azure Databricks workspace and/or HDInsight cluster to create."
       }
     },
     "pricingTier": {
       "type": "string",
       "defaultValue": "standard",
-      "allowedValues": [
-        "standard",
-        "premium"
-      ],
+      "allowedValues": ["standard", "premium"],
       "metadata": {
         "description": "The pricing tier of Databricks workspace."
       }
@@ -78,20 +66,23 @@
       "type": "string",
       "defaultValue": "admin",
       "metadata": {
-        "description": "These credentials can be used to submit jobs to the cluster and to log into cluster dashboards."
+        "description":
+          "These credentials can be used to submit jobs to the cluster and to log into cluster dashboards."
       }
     },
     "clusterLoginPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
+        "description":
+          "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
       }
     },
     "location": {
       "type": "string",
       "defaultValue": "westus2",
       "metadata": {
-        "description": "The location where all azure resources will be deployed."
+        "description":
+          "The location where all azure resources will be deployed."
       }
     },
     "clusterVersion": {
@@ -119,7 +110,8 @@
       "type": "string",
       "defaultValue": "sshuser",
       "metadata": {
-        "description": "These credentials can be used to remotely access the cluster."
+        "description":
+          "These credentials can be used to remotely access the cluster."
       }
     },
     "sshPublicKey": {
@@ -131,7 +123,8 @@
     "sshPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
+        "description":
+          "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
       }
     },
     "clusterCount": {
@@ -219,18 +212,17 @@
     "publicIPAddressName": {
       "type": "string",
       "metadata": {
-        "description": "The name of the public IP address used by the Load Balancer"
+        "description":
+          "The name of the public IP address used by the Load Balancer"
       },
       "defaultValue": "adpublicIP"
     },
     "publicIPAddressType": {
       "type": "string",
-      "allowedValues": [
-        "Dynamic",
-        "Static"
-      ],
+      "allowedValues": ["Dynamic", "Static"],
       "metadata": {
-        "description": "The type of the public IP address used by the Load Balancer"
+        "description":
+          "The type of the public IP address used by the Load Balancer"
       },
       "defaultValue": "Dynamic"
     },
@@ -313,13 +305,15 @@
     "headnodeVMSize": {
       "type": "string",
       "metadata": {
-        "description": "Specify head node VM size. Only use Extralarge for this preview."
+        "description":
+          "Specify head node VM size. Only use Extralarge for this preview."
       }
     },
     "adAvailabilitySetName": {
       "type": "string",
       "metadata": {
-        "description": "The name of the availability set that the AD VM is created in"
+        "description":
+          "The name of the availability set that the AD VM is created in"
       },
       "defaultValue": "adAvailabiltySet"
     },
@@ -332,7 +326,8 @@
     "dnsPrefix": {
       "type": "string",
       "metadata": {
-        "description": "The DNS prefix for the public IP address used by the Load Balancer"
+        "description":
+          "The DNS prefix for the public IP address used by the Load Balancer"
       }
     },
     "pdcRDPPort": {
@@ -352,7 +347,8 @@
     "assetLocation": {
       "type": "string",
       "metadata": {
-        "description": "The location of resources such as templates and DSC modules that the script is dependent"
+        "description":
+          "The location of resources such as templates and DSC modules that the script is dependent"
       },
       "defaultValue": "http://nityawestus.blob.core.windows.net/adtemplateha"
     },
@@ -372,31 +368,36 @@
     "adminPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "The password for the Administrator account of the new VM and Domain"
+        "description":
+          "The password for the Administrator account of the new VM and Domain"
       }
     },
     "newUserPrefix": {
       "type": "string",
       "metadata": {
-        "description": "This template will create 4 AD users with the given prefix e.g. if the prefix is 'testuser', there will be 4 users created named testuser1, testuser2, testuser3, testuser4"
+        "description":
+          "This template will create 4 AD users with the given prefix e.g. if the prefix is 'testuser', there will be 4 users created named testuser1, testuser2, testuser3, testuser4"
       }
     },
     "newUserPassword": {
       "type": "securestring",
       "metadata": {
-        "description": "Password for the new users. All the 4 users will have the same password. It is highly recommended that you change it as soon as the cluster is created"
+        "description":
+          "Password for the new users. All the 4 users will have the same password. It is highly recommended that you change it as soon as the cluster is created"
       }
     },
     "newGroupName": {
       "type": "string",
       "metadata": {
-        "description": "Name of the AD group to be created. The 4 users will be added to this group"
+        "description":
+          "Name of the AD group to be created. The 4 users will be added to this group"
       }
     },
     "secureLdapCertificate": {
       "type": "string",
       "metadata": {
-        "description": "Base 64 encoded certificate to use for configuring secure ldap. The subject name must be *.<domain name>. The certificate must have the private key and should be marked exportable"
+        "description":
+          "Base 64 encoded certificate to use for configuring secure ldap. The subject name must be *.<domain name>. The certificate must have the private key and should be marked exportable"
       }
     },
     "secureLdapCertificatePassword": {
@@ -407,10 +408,10 @@
     }
   },
   "variables": {
-    "cleanResourcePrefix": "[replace(replace(replace(toLower(parameters('clusterName')), '-', ''), '_', ''), '.', '')]",
+    "cleanResourcePrefix":
+      "[replace(replace(replace(toLower(parameters('clusterName')), '-', ''), '_', ''), '.', '')]",
     "clusterAttachedStorageName": "[parameters('clusterName')]",
     "serverName": "[concat('server', uniqueString(resourceGroup().id))]",
-    "managedResourceGroupName": "[concat('databricks-rg-', parameters('clusterName'), '-', uniqueString(parameters('clusterName'), resourceGroup().id))]",
     "dataBaseName": "metastore",
     "dataBaseCollation": "SQL_Latin1_General_CP1_CI_AS",
     "dataBaseEdition": "Standard",
@@ -423,46 +424,66 @@
     "adLBBE": "LBBE",
     "adPDCRDPNAT": "adPDCRDP",
     "adBDCRDPNAT": "adBDCRDP",
-    "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-    "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubnetName'))]",
-    "adPDCNicId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]",
-    "adPDCIPConfigID": "[concat(variables('adPDCNicId'),'/ipConfigurations/ipconfig1')]",
-    "adBDCNicId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]",
-    "adBDCIPConfigID": "[concat(variables('adBDCNicId'),'/ipConfigurations/ipconfig1')]",
+    "VnetID":
+      "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "adSubnetRef":
+      "[concat(variables('VnetID'),'/subnets/',parameters('adSubnetName'))]",
+    "adPDCNicId":
+      "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]",
+    "adPDCIPConfigID":
+      "[concat(variables('adPDCNicId'),'/ipConfigurations/ipconfig1')]",
+    "adBDCNicId":
+      "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]",
+    "adBDCIPConfigID":
+      "[concat(variables('adBDCNicId'),'/ipConfigurations/ipconfig1')]",
     "adLBName": "adLoadBalancer",
-    "adlbID": "[resourceId('Microsoft.Network/loadBalancers',variables('adLBName'))]",
-    "adlbFEConfigID": "[concat(variables('adlbID'),'/frontendIPConfigurations/',variables('adLBFE'))]",
-    "adPDCRDPNATRuleID": "[concat(variables('adlbID'),'/inboundNatRules/',variables('adPDCRDPNAT'))]",
-    "adBDCRDPNATRuleID": "[concat(variables('adlbID'),'/inboundNatRules/',variables('adBDCRDPNAT'))]",
-    "adBEAddressPoolID": "[concat(variables('adlbID'),'/backendAddressPools/',variables('adLBBE'))]",
+    "adlbID":
+      "[resourceId('Microsoft.Network/loadBalancers',variables('adLBName'))]",
+    "adlbFEConfigID":
+      "[concat(variables('adlbID'),'/frontendIPConfigurations/',variables('adLBFE'))]",
+    "adPDCRDPNATRuleID":
+      "[concat(variables('adlbID'),'/inboundNatRules/',variables('adPDCRDPNAT'))]",
+    "adBDCRDPNATRuleID":
+      "[concat(variables('adlbID'),'/inboundNatRules/',variables('adBDCRDPNAT'))]",
+    "adBEAddressPoolID":
+      "[concat(variables('adlbID'),'/backendAddressPools/',variables('adLBBE'))]",
     "adPDCDataDisk": "ADPDCDataDisk",
     "adBDCDataDisk": "ADBDCDataDisk",
     "adDataDiskSize": 1000,
-    "vnetTemplateUri": "[concat(parameters('assetLocation'),'/nestedtemplates/vnet.json')]",
-    "nicTemplateUri": "[concat(parameters('assetLocation'),'/nestedtemplates/nic.json')]",
-    "vnetwithDNSTemplateUri": "[concat(parameters('assetLocation'),'/nestedtemplates/vnet-with-dns-server.json')]",
-    "configureADBDCTemplateUri": "[concat(parameters('assetLocation'),'/nestedtemplates/configureADBDC.json')]",
-    "adPDCModulesURL": "[concat(parameters('assetLocation'),'/DSC/CreateADPDC.ps1.zip')]",
+    "vnetTemplateUri":
+      "[concat(parameters('assetLocation'),'/nestedtemplates/vnet.json')]",
+    "nicTemplateUri":
+      "[concat(parameters('assetLocation'),'/nestedtemplates/nic.json')]",
+    "vnetwithDNSTemplateUri":
+      "[concat(parameters('assetLocation'),'/nestedtemplates/vnet-with-dns-server.json')]",
+    "configureADBDCTemplateUri":
+      "[concat(parameters('assetLocation'),'/nestedtemplates/configureADBDC.json')]",
+    "adPDCModulesURL":
+      "[concat(parameters('assetLocation'),'/DSC/CreateADPDC.ps1.zip')]",
     "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
-    "adBDCPreparationModulesURL": "[concat(parameters('assetLocation'),'/DSC/PrepareADBDC.ps1.zip')]",
+    "adBDCPreparationModulesURL":
+      "[concat(parameters('assetLocation'),'/DSC/PrepareADBDC.ps1.zip')]",
     "adBDCPreparationFunction": "PrepareADBDC.ps1\\PrepareADBDC",
-    "adBDCConfigurationModulesURL": "[concat(parameters('assetLocation'),'/DSC/ConfigureADBDC.ps1.zip')]",
+    "adBDCConfigurationModulesURL":
+      "[concat(parameters('assetLocation'),'/DSC/ConfigureADBDC.ps1.zip')]",
     "adBDCConfigurationFunction": "ConfigureADBDC.ps1\\ConfigureADBDC",
     "defaultApiVersion": "2015-05-01-preview",
     "clusterApiVersion": "2015-03-01-preview",
-    "userGroupsArray": [
-      "[parameters('newGroupName')]"
-    ],
-    "ldapsUrlsArray": [
-      "[concat('ldaps://', parameters('domainName'),':636')]"
-    ],
-    "dataFactoryName": "[concat(variables('cleanResourcePrefix'), 'adf', uniqueString(resourceGroup().id))]",
-    "factoryId": "[concat('Microsoft.DataFactory/factories/', variables('dataFactoryName'))]",
-    "RetailData_BlobStorage_SasUri": "https://retaildatasamples.blob.core.windows.net/data?sv=2017-07-29&sr=c&sig=0%2FdYdx%2FW1X8EbO6GpH0R4ZEBrAUkYWqk2uz%2Fym5w3Gg%3D&st=2018-04-01T00%3A00%3A00Z&se=2099-12-31T12%3A59%3A59Z&sp=rl",
+    "userGroupsArray": ["[parameters('newGroupName')]"],
+    "ldapsUrlsArray": ["[concat('ldaps://', parameters('domainName'),':636')]"],
+    "dataFactoryName":
+      "[concat(variables('cleanResourcePrefix'), 'adf', uniqueString(resourceGroup().id))]",
+    "factoryId":
+      "[concat('Microsoft.DataFactory/factories/', variables('dataFactoryName'))]",
+    "RetailData_BlobStorage_SasUri":
+      "https://retaildatasamples.blob.core.windows.net/data?sv=2017-07-29&sr=c&sig=0%2FdYdx%2FW1X8EbO6GpH0R4ZEBrAUkYWqk2uz%2Fym5w3Gg%3D&st=2018-04-01T00%3A00%3A00Z&se=2099-12-31T12%3A59%3A59Z&sp=rl",
     "retailData_folderPath": "data/retaildata/rawdata/",
-    "retailData_weblogs_folderPath": "[concat(variables('retailData_folderPath'), 'weblognew')]",
-    "retailData_users_folderPath": "[concat(variables('retailData_folderPath'), 'UserFile')]",
-    "retailData_products_folderPath": "[concat(variables('retailData_folderPath'), 'ProductFile')]",
+    "retailData_weblogs_folderPath":
+      "[concat(variables('retailData_folderPath'), 'weblognew')]",
+    "retailData_users_folderPath":
+      "[concat(variables('retailData_folderPath'), 'UserFile')]",
+    "retailData_products_folderPath":
+      "[concat(variables('retailData_folderPath'), 'ProductFile')]",
     "weblogsDestinationPath": "data/weblogs/",
     "usersDestinationPath": "data/users/",
     "productsDestinationPath": "data/products/",
@@ -499,7 +520,8 @@
       ]
     },
     {
-      "name": "[concat(variables('serverName'),'/',variables('dataBaseName'), copyIndex())]",
+      "name":
+        "[concat(variables('serverName'),'/',variables('dataBaseName'), copyIndex())]",
       "type": "Microsoft.Sql/servers/databases",
       "copy": {
         "name": "sqldatabasecopy",
@@ -517,7 +539,8 @@
         "collation": "[variables('dataBaseCollation')]",
         "edition": "[variables('dataBaseEdition')]",
         "maxSizeBytes": "268435456000",
-        "requestedServiceObjectiveName": "[variables('dataBaseRequestedServiceObjectiveName')]"
+        "requestedServiceObjectiveName":
+          "[variables('dataBaseRequestedServiceObjectiveName')]"
       }
     },
     {
@@ -585,9 +608,7 @@
       "tags": {},
       "properties": {
         "addressSpace": {
-          "addressPrefixes": [
-            "[variables('clusterVNetAddressSpace')]"
-          ]
+          "addressPrefixes": ["[variables('clusterVNetAddressSpace')]"]
         },
         "subnets": [
           {
@@ -601,21 +622,31 @@
     },
     // Azure Data Factory
     {
-      "name": "[variables('dataFactoryName')]",
+      "name": "[concat(variables('dataFactoryName'), copyIndex())]",
       "type": "Microsoft.DataFactory/factories",
       "location": "[resourceGroup().location]",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfcopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "identity": {
         "type": "SystemAssigned"
       },
       "properties": {}
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/Pipeline_CopyRetailDataToStorageAccount')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/Pipeline_CopyRetailDataToStorageAccount')]",
       "type": "Microsoft.DataFactory/factories/pipelines",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfpipelinecopyretaildatacopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
-        "description": "Copies files from the retaildata public storage account to your storage account",
+        "description":
+          "Copies files from the retaildata public storage account to your storage account",
         "activities": [
           {
             "name": "Copy_weblogs",
@@ -732,18 +763,23 @@
         ]
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/datasets/retaildata_weblogs')]",
-        "[concat(variables('factoryId'), '/datasets/weblogs_output')]",
-        "[concat(variables('factoryId'), '/datasets/retaildata_users')]",
-        "[concat(variables('factoryId'), '/datasets/users_output')]",
-        "[concat(variables('factoryId'), '/datasets/retaildata_products')]",
-        "[concat(variables('factoryId'), '/datasets/products_output')]"
+        "[concat(variables('factoryId'), copyIndex(), '/datasets/retaildata_weblogs')]",
+        "[concat(variables('factoryId'), copyIndex(), '/datasets/weblogs_output')]",
+        "[concat(variables('factoryId'), copyIndex(), '/datasets/retaildata_users')]",
+        "[concat(variables('factoryId'), copyIndex(), '/datasets/users_output')]",
+        "[concat(variables('factoryId'), copyIndex(), '/datasets/retaildata_products')]",
+        "[concat(variables('factoryId'), copyIndex(), '/datasets/products_output')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/retaildata_weblogs')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/retaildata_weblogs')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfretaildataweblogscopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "linkedServiceName": {
           "referenceName": "RetailData_BlobStorage",
@@ -803,13 +839,18 @@
         }
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/linkedServices/RetailData_BlobStorage')]"
+        "[concat(variables('factoryId'), copyIndex(), '/linkedServices/RetailData_BlobStorage')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/weblogs_output')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/weblogs_output')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfweblogsoutputcopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "linkedServiceName": {
           "referenceName": "Destination_BlobStorage",
@@ -869,13 +910,18 @@
         }
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/linkedServices/Destination_BlobStorage')]"
+        "[concat(variables('factoryId'), copyIndex(), '/linkedServices/Destination_BlobStorage')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/retaildata_users')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/retaildata_users')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfretaildatauserscopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "linkedServiceName": {
           "referenceName": "RetailData_BlobStorage",
@@ -896,13 +942,18 @@
         }
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/linkedServices/RetailData_BlobStorage')]"
+        "[concat(variables('factoryId'), copyIndex(), '/linkedServices/RetailData_BlobStorage')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/users_output')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/users_output')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfusersoutputcopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "linkedServiceName": {
           "referenceName": "Destination_BlobStorage",
@@ -922,13 +973,18 @@
         }
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/linkedServices/Destination_BlobStorage')]"
+        "[concat(variables('factoryId'), copyIndex(), '/linkedServices/Destination_BlobStorage')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/retaildata_products')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/retaildata_products')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adfretaildataproductscopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "linkedServiceName": {
           "referenceName": "RetailData_BlobStorage",
@@ -949,13 +1005,18 @@
         }
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/linkedServices/RetailData_BlobStorage')]"
+        "[concat(variables('factoryId'), copyIndex(), '/linkedServices/RetailData_BlobStorage')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/products_output')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/products_output')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "productsoutputcopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "linkedServiceName": {
           "referenceName": "Destination_BlobStorage",
@@ -975,13 +1036,18 @@
         }
       },
       "dependsOn": [
-        "[concat(variables('factoryId'), '/linkedServices/Destination_BlobStorage')]"
+        "[concat(variables('factoryId'), copyIndex(), '/linkedServices/Destination_BlobStorage')]"
       ]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/RetailData_BlobStorage')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/RetailData_BlobStorage')]",
       "type": "Microsoft.DataFactory/factories/linkedServices",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adflinkedsourceblobcopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "type": "AzureStorage",
         "typeProperties": {
@@ -991,26 +1057,30 @@
           }
         }
       },
-      "dependsOn": [
-        "[variables('factoryId')]"
-      ]
+      "dependsOn": ["[concat(variables('factoryId'), copyIndex())]"]
     },
     {
-      "name": "[concat(variables('dataFactoryName'), '/Destination_BlobStorage')]",
+      "name":
+        "[concat(variables('dataFactoryName'), copyIndex(), '/Destination_BlobStorage')]",
       "type": "Microsoft.DataFactory/factories/linkedServices",
       "apiVersion": "2017-09-01-preview",
+      "copy": {
+        "name": "adflinkeddestinationblobcopy",
+        "count": "[parameters('clusterCount')]"
+      },
       "properties": {
         "type": "AzureStorage",
         "typeProperties": {
           "connectionString": {
             "type": "SecureString",
-            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('clusterAttachedStorageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]"
+            "value":
+              "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('clusterAttachedStorageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]"
           }
         }
       },
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/',variables('clusterAttachedStorageName'))]",
-        "[variables('factoryId')]"
+        "[concat(variables('factoryId'), copyIndex())]"
       ]
     },
     // Azure Databricks workspace
@@ -1034,7 +1104,8 @@
         "name": "[parameters('pricingTier')]"
       },
       "properties": {
-        "ManagedResourceGroupId": "[concat(subscription().id, '/resourceGroups/', variables('managedResourceGroupName'))]"
+        "ManagedResourceGroupId":
+          "[concat(subscription().id, '/resourceGroups/', 'databricks-rg-', parameters('clusterName'), copyIndex(), '-', uniqueString(parameters('clusterName'), resourceGroup().id))]"
       }
     },
     // LLAP Cluster
@@ -1062,38 +1133,53 @@
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
-              "restAuthCredential.username": "[parameters('clusterLoginUserName')]",
-              "restAuthCredential.password": "[parameters('clusterLoginPassword')]"
+              "restAuthCredential.username":
+                "[parameters('clusterLoginUserName')]",
+              "restAuthCredential.password":
+                "[parameters('clusterLoginPassword')]"
             },
             "hive-site": {
-              "javax.jdo.option.ConnectionDriverName": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-              "javax.jdo.option.ConnectionURL": "[concat('jdbc:sqlserver://',variables('serverName'),'.database.windows.net',';database=',variables('dataBaseName'),copyIndex(),';encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300')]",
-              "javax.jdo.option.ConnectionUserName": "[parameters('databaseAdminUsername')]",
-              "javax.jdo.option.ConnectionPassword": "[parameters('databaseAdminPassword')]"
+              "javax.jdo.option.ConnectionDriverName":
+                "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+              "javax.jdo.option.ConnectionURL":
+                "[concat('jdbc:sqlserver://',variables('serverName'),'.database.windows.net',';database=',variables('dataBaseName'),copyIndex(),';encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300')]",
+              "javax.jdo.option.ConnectionUserName":
+                "[parameters('databaseAdminUsername')]",
+              "javax.jdo.option.ConnectionPassword":
+                "[parameters('databaseAdminPassword')]"
             },
             "hive-env": {
-              "hive_database": "Existing MSSQL Server database with SQL authentication",
-              "hive_database_name": "[concat(variables('dataBaseName'), copyIndex())]",
+              "hive_database":
+                "Existing MSSQL Server database with SQL authentication",
+              "hive_database_name":
+                "[concat(variables('dataBaseName'), copyIndex())]",
               "hive_database_type": "mssql",
-              "hive_existing_mssql_server_database": "[concat(variables('dataBaseName'), copyIndex())]",
-              "hive_existing_mssql_server_host": "[concat(variables('serverName'),'.database.windows.net')]",
-              "hive_hostname": "[concat(variables('serverName'),'.database.windows.net')]"
+              "hive_existing_mssql_server_database":
+                "[concat(variables('dataBaseName'), copyIndex())]",
+              "hive_existing_mssql_server_host":
+                "[concat(variables('serverName'),'.database.windows.net')]",
+              "hive_hostname":
+                "[concat(variables('serverName'),'.database.windows.net')]"
             }
           }
         },
         "storageProfile": {
           "storageaccounts": [
             {
-              "name": "[concat(variables('clusterAttachedStorageName'),'llap','.blob.core.windows.net')]",
+              "name":
+                "[concat(variables('clusterAttachedStorageName'),'llap','.blob.core.windows.net')]",
               "isDefault": true,
               "container": "[concat(parameters('clusterName'), copyIndex())]",
-              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'llap')), variables('defaultApiVersion')).key1]"
+              "key":
+                "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'llap')), variables('defaultApiVersion')).key1]"
             },
             {
-              "name": "[concat(variables('clusterAttachedStorageName'),'.blob.core.windows.net')]",
+              "name":
+                "[concat(variables('clusterAttachedStorageName'),'.blob.core.windows.net')]",
               "isDefault": false,
               "container": "blank",
-              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName')), variables('defaultApiVersion')).key1]"
+              "key":
+                "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName')), variables('defaultApiVersion')).key1]"
             }
           ]
         },
@@ -1175,18 +1261,22 @@
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": true,
-              "restAuthCredential.username": "[parameters('clusterLoginUserName')]",
-              "restAuthCredential.password": "[parameters('clusterLoginPassword')]"
+              "restAuthCredential.username":
+                "[parameters('clusterLoginUserName')]",
+              "restAuthCredential.password":
+                "[parameters('clusterLoginPassword')]"
             }
           }
         },
         "storageProfile": {
           "storageaccounts": [
             {
-              "name": "[concat(variables('clusterAttachedStorageName'),'kafka','.blob.core.windows.net')]",
+              "name":
+                "[concat(variables('clusterAttachedStorageName'),'kafka','.blob.core.windows.net')]",
               "isDefault": true,
               "container": "[concat(parameters('clusterName'), copyIndex())]",
-              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'kafka')), variables('defaultApiVersion')).key1]"
+              "key":
+                "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'kafka')), variables('defaultApiVersion')).key1]"
             }
           ]
         },
@@ -1206,8 +1296,10 @@
                 }
               },
               "virtualNetworkProfile": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
-                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
+                "subnet":
+                  "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
               }
             },
             {
@@ -1229,8 +1321,10 @@
                 }
               },
               "virtualNetworkProfile": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
-                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
+                "subnet":
+                  "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
               }
             },
             {
@@ -1247,8 +1341,10 @@
                 }
               },
               "virtualNetworkProfile": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
-                "subnet": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
+                "subnet":
+                  "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
               }
             }
           ]
@@ -1318,7 +1414,8 @@
             "name": "[variables('adLBFE')]",
             "properties": {
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]"
               }
             }
           }
@@ -1443,7 +1540,8 @@
           "vmSize": "[parameters('adVMSize')]"
         },
         "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
+          "id":
+            "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
         },
         "osProfile": {
           "computerName": "[parameters('adPDCVMName')]",
@@ -1460,7 +1558,8 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds0/','osdisk.vhd')]"
+              "uri":
+                "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds0/','osdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -1468,7 +1567,8 @@
           "dataDisks": [
             {
               "vhd": {
-                "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds0/', variables('adPDCDataDisk'),'-1.vhd')]"
+                "uri":
+                  "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds0/', variables('adPDCDataDisk'),'-1.vhd')]"
               },
               "name": "[concat(parameters('adPDCVMName'),'-data-disk1')]",
               "caching": "None",
@@ -1481,7 +1581,8 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]"
+              "id":
+                "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]"
             }
           ]
         }
@@ -1503,11 +1604,14 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "ModulesUrl": "[variables('adPDCModulesURL')]",
-              "ConfigurationFunction": "[variables('adPDCConfigurationFunction')]",
+              "ConfigurationFunction":
+                "[variables('adPDCConfigurationFunction')]",
               "Properties": {
                 "DomainName": "[parameters('domainName')]",
-                "LdapsCertificateContent": "[parameters('secureLdapCertificate')]",
-                "LdapsCertificatePassword": "[parameters('secureLdapCertificatePassword')]",
+                "LdapsCertificateContent":
+                  "[parameters('secureLdapCertificate')]",
+                "LdapsCertificatePassword":
+                  "[parameters('secureLdapCertificatePassword')]",
                 "NewGroupName": "[parameters('newGroupName')]",
                 "AdminCreds": {
                   "UserName": "[parameters('adminUsername')]",
@@ -1517,7 +1621,7 @@
                   "UserName": "[parameters('newUserPrefix')]",
                   "Password": "PrivateSettingsRef:NewUserPassword"
                 },
-                "DnsServerZone": "[parameters('dnsServerZone')]",
+                "DnsServerZone": "[parameters('dnsServerZone')]"
               }
             },
             "protectedSettings": {
@@ -1558,9 +1662,7 @@
             "value": "[parameters('adSubnet')]"
           },
           "DNSServerAddress": {
-            "value": [
-              "[parameters('adPDCNicIPAddress')]"
-            ]
+            "value": ["[parameters('adPDCNicIPAddress')]"]
           }
         }
       }
@@ -1609,9 +1711,7 @@
             ]
           },
           "dnsServers": {
-            "value": [
-              "[parameters('adPDCNicIPAddress')]"
-            ]
+            "value": ["[parameters('adPDCNicIPAddress')]"]
           }
         }
       }
@@ -1633,7 +1733,8 @@
           "vmSize": "[parameters('adVMSize')]"
         },
         "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
+          "id":
+            "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
         },
         "osProfile": {
           "computerName": "[parameters('adBDCVMName')]",
@@ -1650,7 +1751,8 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds1/','osdisk.vhd')]"
+              "uri":
+                "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds1/','osdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -1658,7 +1760,8 @@
           "dataDisks": [
             {
               "vhd": {
-                "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds1/',variables('adBDCDataDisk'),'-1.vhd')]"
+                "uri":
+                  "[concat(reference(resourceId('Microsoft.Storage/storageAccounts/', variables('clusterAttachedStorageName'))).primaryEndpoints.blob,'vhds1/',variables('adBDCDataDisk'),'-1.vhd')]"
               },
               "name": "[concat(parameters('adBDCVMName'),'-data-disk1')]",
               "caching": "None",
@@ -1671,7 +1774,8 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]"
+              "id":
+                "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]"
             }
           ]
         }
@@ -1807,38 +1911,53 @@
           "configurations": {
             "gateway": {
               "restAuthCredential.isEnabled": "true",
-              "restAuthCredential.username": "[parameters('clusterLoginUserName')]",
-              "restAuthCredential.password": "[parameters('clusterLoginPassword')]"
+              "restAuthCredential.username":
+                "[parameters('clusterLoginUserName')]",
+              "restAuthCredential.password":
+                "[parameters('clusterLoginPassword')]"
             },
             "hive-site": {
-              "javax.jdo.option.ConnectionDriverName": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-              "javax.jdo.option.ConnectionURL": "[concat('jdbc:sqlserver://',variables('serverName'),'.database.windows.net',';database=',variables('dataBaseName'),copyIndex(),';encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300')]",
-              "javax.jdo.option.ConnectionUserName": "[parameters('databaseAdminUsername')]",
-              "javax.jdo.option.ConnectionPassword": "[parameters('databaseAdminPassword')]"
+              "javax.jdo.option.ConnectionDriverName":
+                "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+              "javax.jdo.option.ConnectionURL":
+                "[concat('jdbc:sqlserver://',variables('serverName'),'.database.windows.net',';database=',variables('dataBaseName'),copyIndex(),';encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300')]",
+              "javax.jdo.option.ConnectionUserName":
+                "[parameters('databaseAdminUsername')]",
+              "javax.jdo.option.ConnectionPassword":
+                "[parameters('databaseAdminPassword')]"
             },
             "hive-env": {
-              "hive_database": "Existing MSSQL Server database with SQL authentication",
-              "hive_database_name": "[concat(variables('dataBaseName'), copyIndex())]",
+              "hive_database":
+                "Existing MSSQL Server database with SQL authentication",
+              "hive_database_name":
+                "[concat(variables('dataBaseName'), copyIndex())]",
               "hive_database_type": "mssql",
-              "hive_existing_mssql_server_database": "[concat(variables('dataBaseName'), copyIndex())]",
-              "hive_existing_mssql_server_host": "[concat(variables('serverName'),'.database.windows.net')]",
-              "hive_hostname": "[concat(variables('serverName'),'.database.windows.net')]"
+              "hive_existing_mssql_server_database":
+                "[concat(variables('dataBaseName'), copyIndex())]",
+              "hive_existing_mssql_server_host":
+                "[concat(variables('serverName'),'.database.windows.net')]",
+              "hive_hostname":
+                "[concat(variables('serverName'),'.database.windows.net')]"
             }
           }
         },
         "storageProfile": {
           "storageaccounts": [
             {
-              "name": "[concat(variables('clusterAttachedStorageName'),'dj','.blob.core.windows.net')]",
+              "name":
+                "[concat(variables('clusterAttachedStorageName'),'dj','.blob.core.windows.net')]",
               "isDefault": true,
               "container": "[concat(parameters('clusterName'), copyIndex())]",
-              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'dj')), variables('defaultApiVersion')).key1]"
+              "key":
+                "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'dj')), variables('defaultApiVersion')).key1]"
             },
             {
-              "name": "[concat(variables('clusterAttachedStorageName'),'.blob.core.windows.net')]",
+              "name":
+                "[concat(variables('clusterAttachedStorageName'),'.blob.core.windows.net')]",
               "isDefault": false,
               "container": "blank",
-              "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName')), variables('defaultApiVersion')).key1]"
+              "key":
+                "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName')), variables('defaultApiVersion')).key1]"
             }
           ]
         },
@@ -1847,7 +1966,8 @@
           "domain": "[parameters('domainName')]",
           "organizationalUnitDN": "[parameters('organizationalUnitDN')]",
           "ldapsUrls": "[variables('ldapsUrlsArray')]",
-          "domainUsername": "[concat(parameters('adminUsername'), '@', parameters('domainName'))]",
+          "domainUsername":
+            "[concat(parameters('adminUsername'), '@', parameters('domainName'))]",
           "domainUserPassword": "[parameters('adminPassword')]",
           "clusterUsersGroupDNs": "[variables('userGroupsArray')]"
         },
@@ -1873,8 +1993,10 @@
                 }
               },
               "virtualNetworkProfile": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-                "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+                "subnet":
+                  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
               },
               "scriptActions": []
             },
@@ -1898,8 +2020,10 @@
                 }
               },
               "virtualNetworkProfile": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-                "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+                "subnet":
+                  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
               },
               "scriptActions": []
             },
@@ -1923,8 +2047,10 @@
                 }
               },
               "virtualNetworkProfile": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
-                "subnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
+                "id":
+                  "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+                "subnet":
+                  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
               },
               "scriptActions": []
             }
