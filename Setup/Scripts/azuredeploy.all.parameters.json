@@ -1,24 +1,19 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "$schema":
+    "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "provisionSpark": {
       "value": "Yes"
     },
-    "provisionLLAP": {
-      "value": "No"
-    },
     "provisionKafka": {
-      "value": "No"
-    },
-    "provisionSecure": {
       "value": "No"
     },
     "clusterName": {
       "value": "databrickslab20180501"
     },
     "pricingTier": {
-      "value": "standard"
+      "value": "premium"
     },
     "clusterLoginUserName": {
       "value": "admin"
@@ -42,57 +37,14 @@
       "value": "sshuser"
     },
     "sshPublicKey": {
-      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kMj6Ac65U70HpUfddj3mU6PGJIBjbMif8qHAOW8N75K11VVL/RiOuPkMEfHULlgzKXF1mpzrFoos7rP6eHz0th0evLcO4/vCh9qwyK5tYxZB7ew55HN3glL4ZC31dL+IdlkvfzIsWuUVSs/QoXXKgZ+/Mz5qcjEUFkhstxkuZrxM9lZLFXlFrrecXRqNZqdkYVhJWhwp6PuOAHWb1Ko9fdEV7ifxMrF+mrC0oKzZ4pkWQSsGXTCkatJ021QQc8r2VTnxWF5vvsY3B1DcGgf1cePIhyaWVQzgEV1wUowubGef3vGqfX9yi5lnp6SFux/kXLXIDBddzUhE06gqr1nV imported-openssh-key"
+      "value":
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kMj6Ac65U70HpUfddj3mU6PGJIBjbMif8qHAOW8N75K11VVL/RiOuPkMEfHULlgzKXF1mpzrFoos7rP6eHz0th0evLcO4/vCh9qwyK5tYxZB7ew55HN3glL4ZC31dL+IdlkvfzIsWuUVSs/QoXXKgZ+/Mz5qcjEUFkhstxkuZrxM9lZLFXlFrrecXRqNZqdkYVhJWhwp6PuOAHWb1Ko9fdEV7ifxMrF+mrC0oKzZ4pkWQSsGXTCkatJ021QQc8r2VTnxWF5vvsY3B1DcGgf1cePIhyaWVQzgEV1wUowubGef3vGqfX9yi5lnp6SFux/kXLXIDBddzUhE06gqr1nV imported-openssh-key"
     },
     "sshPassword": {
       "value": "Abc!1234567890"
     },
     "clusterCount": {
       "value": 1
-    },
-    // External metastore Azure SQL Database parameters
-    "databaseAdminUsername": {
-      "value": "hdi"
-    },
-    "databaseAdminPassword": {
-      "value": "Abc!1234567890"
-    },
-    // Secure cluster parameters
-    "headnodeVMSize": {
-      "value": "ExtraLarge"
-    },
-    "domainName": {
-      "value": "contoso.com"
-    },
-    "dnsPrefix": {
-      "value": "quickstartad"
-    },
-    "organizationalUnitDN": {
-      "value": "OU=Hadoop,DC=contoso,DC=com"
-    },
-    "adVMSize": {
-      "value": "Standard_DS2_v2"
-    },
-    "adminUsername": {
-      "value": "labuser"
-    },
-    "adminPassword": {
-      "value": "Abc!1234567890"
-    },
-    "newUserPrefix": {
-      "value": "testuser"
-    },
-    "newUserPassword": {
-      "value": "Abc!1234567890"
-    },
-    "newGroupName": {
-      "value": "testgroup"
-    },
-    "secureLdapCertificate": {
-      "value": "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"
-    },
-    "secureLdapCertificatePassword": {
-      "value": "Pass@word123"
     }
   }
 }
