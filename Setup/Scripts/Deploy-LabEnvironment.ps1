@@ -1,4 +1,9 @@
-﻿Param(
+﻿# -skipLab1 indicates that the files should be copied to each environment's
+# storage container, and that Azure Data Factory should not be provisioned.
+# -skipLab4 indicates that HDInsight Kafka will not be used. This is the
+# same as setting the provisionKafka parameter to 'No' within the
+# azuredeploy.all.parameters.json file.
+Param(
   [string] [Parameter(Mandatory = $true)] $subscriptionId,
   [string] [Parameter(Mandatory = $true)] $resourceGroupName,
   [string] [Parameter(Mandatory = $true)] $clusterName,
@@ -7,13 +12,7 @@
   [switch] $skipLab1
 )
 
-#$subscriptionId = 'e123f1b3-d19b-4cfa-98e9-bc9be62717bc'
-#$resourceGroupName = 'HDInsightLabsEnvironmentZ'
-#$resourceGroupLocation = 'westus2'
-#$clusterName = 'hdilabsz1'
-#$numInstances = 2
-
-$destContainerName = "hdi-labs"
+$destContainerName = "databricks-labs"
 $sourceFolder = Get-Location
 $clusterInstanceName = $clusterName
 $resourceGroupInstanceName = $resourceGroupName
@@ -22,8 +21,6 @@ $skipLab1String = "No"
 if ($skipLab1) {
   $skipLab1String = "Yes"
 }
-
-# Get-AzureRmSubscription
 
 Login-AzureRmAccount 
 
@@ -39,8 +36,7 @@ Set-Location $sourceFolder
   -SkipLab1 $skipLab1String
 $storageAccountName = $clusterInstanceName
 Select-AzureRmSubscription -SubscriptionId $subscriptionId
-#Set-AzureRmCurrentStorageAccount -ResourceGroupName $resourceGroupInstanceName -Name $storageAccountName
-#New-AzureStorageContainer -Name $destContainerName -Permission Off
+
 $storageKey = (Get-AzureRmStorageAccountKey -Name $storageAccountName -ResourceGroupName $resourceGroupInstanceName).Value[0]
 
 $sourceAccountName = "retaildatasamples"
@@ -54,13 +50,14 @@ For ($i = 0; $i -lt $clusterCount; $i++) {
   $destContainerName = $clusterName + $i
   ### Create a Blob Container in the Storage Account
   New-AzureStorageContainer -Context $contextDest -Name $destContainerName;
-  Write-Host("Copy the following to your Databricks cluster init configuration (blob files will be located in a container named '" + $destContainerName + "'):")
-  Write-Host("spark.hadoop.fs.azure.account.key." + $storageAccountName + ".blob.core.windows.net " + $storageKey)
     
   if ($skipLab1) {
     # Copy blob files to the storage container if skipping Lab 1
     Get-AzureStorageBlob -Context $contextSource -Container $sourceContainer -Blob "*.csv" | Start-AzureStorageBlobCopy -DestContext $contextDest -DestContainer $destContainerName
     Get-AzureStorageBlob -Context $contextSource -Container $sourceContainer -Blob "*.txt" | Start-AzureStorageBlobCopy -DestContext $contextDest -DestContainer $destContainerName
   }
+
+  Write-Host("Copy the following to your Databricks cluster init configuration (blob files will be located in a container named '" + $destContainerName + "'):")
+  Write-Host("spark.hadoop.fs.azure.account.key." + $storageAccountName + ".blob.core.windows.net " + $storageKey) -ForegroundColor Cyan
 }
 Write-Host("Storage container creation complete, and deployment operations are finished. If there are no errors, you are free to begin using the workspace and clusters.") -ForegroundColor Green
