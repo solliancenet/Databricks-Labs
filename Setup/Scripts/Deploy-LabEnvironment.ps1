@@ -22,6 +22,9 @@ if ($skipLab1) {
   $skipLab1String = "Yes"
 }
 
+# Increasing the console width to handle long string value output at end with Spark init info
+$Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(500, 25)
+
 Login-AzureRmAccount 
 
 $sub = Select-AzureRmSubscription -SubscriptionId $subscriptionId
