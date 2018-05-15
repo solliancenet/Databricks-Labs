@@ -31,6 +31,15 @@
         "description": "Specifies whether to provision a Kafka cluster."
       }
     },
+    "skipLab1": {
+      "type": "string",
+      "defaultValue": "Yes",
+      "allowedValues": ["Yes", "No"],
+      "metadata": {
+        "description":
+          "Specifies whether to skip the first lab. If so, lab files are copied automatically and ADF is not provisioned."
+      }
+    },
     "clusterName": {
       "type": "string",
       "metadata": {
@@ -122,9 +131,13 @@
       "[concat(variables('retailData_folderPath'), 'UserFile')]",
     "retailData_products_folderPath":
       "[concat(variables('retailData_folderPath'), 'ProductFile')]",
-    "weblogsDestinationPath": "data/weblogs/",
-    "usersDestinationPath": "data/users/",
-    "productsDestinationPath": "data/products/",
+    "retailDataDestination_folderPath": "retaildata/rawdata/",
+    "weblogsDestinationPath":
+      "[concat(variables('retailDataDestination_folderPath'), 'weblognew')]",
+    "usersDestinationPath":
+      "[concat(variables('retailDataDestination_folderPath'), 'UserFile')]",
+    "productsDestinationPath":
+      "[concat(variables('retailDataDestination_folderPath'), 'ProductFile')]",
     "fileName": "part*.csv"
   },
   "resources": [
@@ -180,6 +193,7 @@
     // Azure Data Factory
     {
       "name": "[concat(variables('dataFactoryName'), copyIndex())]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories",
       "location": "[resourceGroup().location]",
       "apiVersion": "2017-09-01-preview",
@@ -195,6 +209,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/Pipeline_CopyRetailDataToStorageAccount')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/pipelines",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -331,6 +346,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/retaildata_weblogs')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -402,6 +418,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/weblogs_output')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -474,6 +491,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/retaildata_users')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -506,6 +524,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/users_output')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -538,6 +557,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/retaildata_products')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -570,6 +590,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/products_output')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/datasets",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -602,6 +623,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/RetailData_BlobStorage')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/linkedServices",
       "apiVersion": "2017-09-01-preview",
       "copy": {
@@ -622,6 +644,7 @@
     {
       "name":
         "[concat(variables('dataFactoryName'), copyIndex(), '/Destination_BlobStorage')]",
+      "condition": "[equals(parameters('skipLab1'),'No')]",
       "type": "Microsoft.DataFactory/factories/linkedServices",
       "apiVersion": "2017-09-01-preview",
       "copy": {
