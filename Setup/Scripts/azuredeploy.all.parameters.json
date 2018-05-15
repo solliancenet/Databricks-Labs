@@ -7,7 +7,7 @@
       "value": "Yes"
     },
     "provisionKafka": {
-      "value": "No"
+      "value": "Yes"
     },
     "clusterName": {
       "value": "databrickslab20180501"
@@ -24,21 +24,11 @@
     "location": {
       "value": "eastus"
     },
-    "clusterWorkerNodeCount": {
-      "value": 2
-    },
-    "clusterKind": {
-      "value": "SPARK"
-    },
     "clusterVersion": {
       "value": "3.6"
     },
     "sshUserName": {
       "value": "sshuser"
-    },
-    "sshPublicKey": {
-      "value":
-        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4kMj6Ac65U70HpUfddj3mU6PGJIBjbMif8qHAOW8N75K11VVL/RiOuPkMEfHULlgzKXF1mpzrFoos7rP6eHz0th0evLcO4/vCh9qwyK5tYxZB7ew55HN3glL4ZC31dL+IdlkvfzIsWuUVSs/QoXXKgZ+/Mz5qcjEUFkhstxkuZrxM9lZLFXlFrrecXRqNZqdkYVhJWhwp6PuOAHWb1Ko9fdEV7ifxMrF+mrC0oKzZ4pkWQSsGXTCkatJ021QQc8r2VTnxWF5vvsY3B1DcGgf1cePIhyaWVQzgEV1wUowubGef3vGqfX9yi5lnp6SFux/kXLXIDBddzUhE06gqr1nV imported-openssh-key"
     },
     "sshPassword": {
       "value": "Abc!1234567890"
