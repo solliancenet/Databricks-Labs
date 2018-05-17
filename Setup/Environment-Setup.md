@@ -1,24 +1,33 @@
 # Environment Setup
 
-This article describes the steps required to setup the environment in order to conduct the labs. 
+This article describes the steps required to setup the environment in order to conduct the labs.
 
+## 1. Deploy the Environment: Databricks workspace, Kafka cluster on HD Insights, attached Storage Accounts, sample data
 
-## 1. Deploy the Environment: HDInsight Clusters, Attached Storage Accounts, Sample Data
-An ARM template and script is provided to aid in provisioning the clusters for attendees to use. Follow these steps to deploy your cluster:
+An ARM template and script is provided to aid in provisioning the Databricks workspace and related services for attendees to use. Follow these steps to deploy your workspace:
 
-1. Navigate to the Setup\Scripts folder. 
-2. Open azuredeploy.all.parameters.json and provide the settings requested. At minimum provide a unique name for the cluster. Enter 'Yes' or 'No' for `provisionSpark`, `provisionLLAP`, `provisionKafka', and `provisionSecure`. This will specify whether to provision a Spark, Interactive (LLAP), Kafka, or Domain-Joined (Secure) set of clusters.
+1. Navigate to the Setup\Scripts folder.
+2. Open azuredeploy.all.parameters.json and provide the settings requested.
+    1. At minimum provide a unique name for the cluster.
+    2. Enter 'Yes' or 'No' for `provisionSpark` and `provisionKafka`. This will specify whether to provision a Databricks workspace and/or Kafka set of clusters.
 3. Save the file.
 4. Open PowerShell and run the following command to login to your Azure account:
 
     ```
     Login-AzureRmAccount
     ```
+5. Next, you will execute the `.\Deploy-LabEnvironment.ps1` PowerShell script, passing in the following parameters:
+    1. subscriptionId (Mandatory)
+    2. resourceGroupName (Mandatory)
+    3. clusterName (Mandatory)
+    4. clusterCount (Mandatory)
+    5. resourceGroupLocation (Default value = 'eastus')
+    6. skipLab1 (optional switch)
 
-4. Run the following command to provision the cluster (be sure to provide a unique cluster name):
+6. Run the following command to provision the workspace (be sure to provide a unique cluster name):
 
     ```
-    .\Deploy-LabEnvironment.ps1 -subscriptionId "[subscriptionID]" -resourceGroupName "[newResourceGroupName]" -clusterName "[clusterNamePrefix]" -clusterCount 1 -resourceGroupLocation "[location]"
+    .\Deploy-LabEnvironment.ps1 -subscriptionId "[subscriptionID]" -resourceGroupName "[newResourceGroupName]" -clusterName "[clusterNamePrefix]" -clusterCount 1 [-resourceGroupLocation "[location]"] [-skipLab1]
     ```
 
     For example, the following creates the environment in the East US location, where 2 clusters are created sharing one storage account (each will have its own container in that storage account):
@@ -32,9 +41,9 @@ An ARM template and script is provided to aid in provisioning the clusters for a
 
     ```
     NOTE: Cluster Creation uses these as the defaults:
-    - cluster name : [user supplied] 
-    - subscription: [user supplied]  
-    - resource group: [user supplied] 
+    - cluster name : [user supplied]
+    - subscription: [user supplied]
+    - resource group: [user supplied]
     - cluster type: Spark 2.1 on Linux HDI 3.6
     - cluster login username: admin
     - cluster login password: Abc!1234567890
@@ -55,19 +64,20 @@ An ARM template and script is provided to aid in provisioning the clusters for a
     ```
 
 ## 2. Verify the Sample Data Copy
-For each cluster, the script takes care of creating a new storage account, creating the default container in it and copying the sample data into that container. After the copy has completed, your clusters will contain a copy of the retaildata files underneath the path /retaildata in the default storage container for the cluster. 
 
-The retaildata source files are currently available at the following location, accessed with a SAS token
+For each cluster, the script takes care of creating a new storage account, creating the default container in it and copying the sample data into that container. After the copy has completed, your clusters will contain a copy of the retaildata files underneath the path /retaildata in the default storage container for the cluster.
+
+The retaildata source files are currently available at the following location, accessed with a SAS token.
 
 **account name**: retaildatasamples
 
 **container**: data
 
-**path**: retaildata  
+**path**: retaildata
 
 **SAS Key**: ?sv=2017-04-17&ss=b&srt=co&sp=rl&se=2019-12-31T18:29:33Z&st=2017-09-18T10:29:33Z&spr=https&sig=bw1EJflDFx9NuvLRdBGql8RU%2FC9oz92Dz8Xs76cftJM%3D
 
-Verify the copy has completed by navigating to the destination container using the Azure Portal. In the container list, select the ellipses and then Container properties. If your ouput matches the following, all of the files have been copied over:
+Verify the copy has completed by navigating to the destination container using the Azure Portal. In the container list, select the ellipses and then Container properties. If your output matches the following, all of the files have been copied over:
 
     Container Size
     * Blob Count: 3202
