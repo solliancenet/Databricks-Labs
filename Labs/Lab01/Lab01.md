@@ -6,7 +6,7 @@ To complete this lab, follow these steps:
 2. Using the Azure Portal, navigate to your Azure Databricks workspace (created by the ARM template in the setup steps).
 3. Create a Databricks cluster in your workspace.
 4. Select Workspace, Users, your user account, and then select Import.
-5. On the Import Notebooks dialog, select browse, and navigate to the location you unzipped the copy of the Databricks Labs repository, and select the copy of Lab01.dbc that you downloaded from this repository.
+5. On the Import Notebooks dialog, select browse, and navigate to the location you unzipped the copy of the Databricks Labs repository, and select the copy of Lab01.dbc in the Lab01 folder that you downloaded from this repository.
 6. Select Import.
 7. Repeat the process for Lab01-ADF.dbc.
 8. In the listing, select Lab01.dbc to open the notebook.
