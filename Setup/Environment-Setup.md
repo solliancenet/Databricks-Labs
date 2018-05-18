@@ -7,7 +7,7 @@ This article describes the steps required to setup the environment in order to c
 An ARM template and script is provided to aid in provisioning the clusters for attendees to use. Follow these steps to deploy your cluster:
 
 1.  Navigate to the Setup\Scripts folder.
-1.  Open azuredeploy.all.parameters.json and provide the settings requested. At minimum provide a unique name for the workspace (`workspaceName`). Enter 'Yes' or 'No' for `provisionSpark` and `provisionKafka'. This will specify whether to provision one or more Databricks workspaces (Spark) or HDInsight Kafka set of clusters.
+1.  Open azuredeploy.all.parameters.json and provide the settings requested. At minimum provide a unique name for the workspace (`workspaceName`). Enter 'Yes' or 'No' for `provisionSpark` and `provisionKafka`. This will specify whether to provision one or more Databricks workspaces (Spark) or HDInsight Kafka set of clusters.
 1.  Save the file.
 1.  Open PowerShell and run the following command to login to your Azure account:
 
