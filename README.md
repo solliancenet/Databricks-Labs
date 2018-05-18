@@ -16,19 +16,11 @@ AdventureWorks is an e-commerce retailer who is looking to improve how they mana
 
 In the lab you will learn how to use Spark SQL (and PySpark) to batch process a 10GB text file dataset, quickly explore its content, identify issues with the data, clean and format the data and load it into global tables to support downstream analytics. You will also learn how to automate these steps using Azure Data Factory (ADF), and a Databricks Notebook activity.
 
-<<<<<<< HEAD
-### [Lab 2 - Data Warehouse / Interactive Pattern - Interactive Querying with Spark and Power BI](Labs/Lab02/Lab02.md)
-
-AdventureWorks would like to create some visualizations of their data to better understand their customers. They are interested in using the powerful visualization capabilities of Power BI and its ability to allow them to share those visualizations, but aren't sure how they can pull in the data to create the dashboards.
-
-They have provided all the weblogs, users, and product tables that you need to quickly explore the data. You will prepare the data to be used in Power BI, explore the data using Spark SQL and Databricks built-in visualizations. Then, you will import the data into Power BI to create interactive dashboards and reports.
-=======
 ### [Lab 2 - Data Warehouse Pattern - Interactive Querying with Spark and Power BI](Labs/Lab02/Lab02.md)
 
 AdventureWorks would like to create some visualizations of their data to better understand their customers. They are interested in using the powerful visualization capabilities of Power BI and its ability to allow them to share those visualizations, but aren't sure how they can pull in the data to create the dashboards.
 
 They have provided all the weblogs, users, and product tables that you need to quickly explore the data. You will prepare the data to be used in Power BI and explore the data using Spark SQL and Databricks' built-in visualizations. Finally, you will import the data into Power BI Desktop to create interactive dashboards and reports.
->>>>>>> bbb42828b79a853eda19c2dddf48f27c8ae74e6e
 
 ### [Lab 3 - Data Science using Spark](Labs/Lab03/Lab03.md)
 
