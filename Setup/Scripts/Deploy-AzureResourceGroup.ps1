@@ -2,9 +2,9 @@
 
 Param(
   [string] [Parameter(Mandatory = $true)] $ResourceGroupLocation,
-  [string] [Parameter(Mandatory = $true)] $ClusterName,
+  [string] [Parameter(Mandatory = $true)] $WorkspaceName,
   [string] $ResourceGroupName = 'DatabricksLabsEnvironment',
-  [string] $ClusterCount = '1',
+  [string] $WorkspaceCount = '1',
   [switch] $UploadArtifacts,
   [string] $StorageAccountName,
   [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
@@ -113,8 +113,8 @@ else {
     -ResourceGroupName $ResourceGroupName `
     -TemplateFile $TemplateFile `
     -TemplateParameterFile $TemplateParametersFile `
-    -clusterName $ClusterName `
-    -clusterCount $ClusterCount `
+    -workspaceName $WorkspaceName `
+    -workspaceCount $WorkspaceCount `
     -location $ResourceGroupLocation `
     -skipLab1 $SkipLab1String `
     @OptionalParameters `

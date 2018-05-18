@@ -9,7 +9,7 @@
     "provisionKafka": {
       "value": "No"
     },
-    "clusterName": {
+    "workspaceName": {
       "value": "databrickslab20180501"
     },
     "pricingTier": {
@@ -33,7 +33,7 @@
     "sshPassword": {
       "value": "Abc!1234567890"
     },
-    "clusterCount": {
+    "workspaceCount": {
       "value": 1
     }
   }

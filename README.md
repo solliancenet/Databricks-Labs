@@ -16,11 +16,11 @@ AdventureWorks is an e-commerce retailer who is looking to improve how they mana
 
 In the lab you will learn how to use Spark SQL (and PySpark) to batch process a 10GB text file dataset, quickly explore its content, identify issues with the data, clean and format the data and load it into global tables to support downstream analytics. You will also learn how to automate these steps using Azure Data Factory (ADF), and a Databricks Notebook activity.
 
-### [Lab 2 - Data Warehouse / Interactive Pattern - Interactive Querying with Spark, LLAP and Power BI](Labs/Lab02/Lab02.md)
+### [Lab 2 - Data Warehouse / Interactive Pattern - Interactive Querying with Spark and Power BI](Labs/Lab02/Lab02.md)
 
 AdventureWorks would like to create some visualizations of their data to better understand their customers. They are interested in using the powerful visualization capabilities of Power BI and its ability to allow them to share those visualizations, but aren't sure how they can pull in the data to create the dashboards.
 
-They have provided all the weblogs, users, and product tables that you need to quickly explore the data. You will prepare the data to be used in Power BI, explore the data using Spark SQL and Databricks built-in visualizations, as well as Matplotlib for more advanced control. You will also run these same interactive queries on an LLAP cluster against the same data to see if there is any performance benefit. Finally, you will import the data into Power BI to create interactive dashboards and reports.
+They have provided all the weblogs, users, and product tables that you need to quickly explore the data. You will prepare the data to be used in Power BI, explore the data using Spark SQL and Databricks built-in visualizations. Then, you will import the data into Power BI to create interactive dashboards and reports.
 
 ### [Lab 3 - Data Science using Spark](Labs/Lab03/Lab03.md)
 
@@ -33,15 +33,6 @@ In this lab, you will train a recommendation model using Spark's built-in collab
 AdventureWorks has asked for the ability to extend their product recommendations feature, integrating the trained Alternating Least Squares (ALS) recommendation model to make predictions against streaming weblog data from Kafka.
 
 In this lab, you will upload and run a Java .jar application to add sample weblog data into a Kafka topic, and use the same application to view the data added. You will then create a simple Kafka producer using Spark to add a few more records to the topic. Next, you will use Spark Structured Streaming to query the data, and run the streamed data against the ALS recommendation model, getting product recommendations for a given user.
-
-
-### [Lab 7 - Extending the cluster with HDInsight Applications](Labs/Lab07/Lab07.md)
-
-AdventureWorks is interested in using HDInsight applications for extending the capabilities their Databricks cluster. They are interested in two applications, H2O Sparkling Water and Apache Solr. H2O will provide machine learning and predictive analytics, while Solr will provide enterprise search capabilities.
-
-They have provided you with the tables for users, products, and weblogs that contain all the data you need. You will build and train a deep learning model using H2O Sparkling Water, combining the capabilities of Spark with H2O. Then, you will use Solr to add search capabilities to the AdventureWorks cluster.
-
-In this lab you will learn how to extend an existing HDInsight cluster by installing both third-party and custom applications.
 
 ## Cleanup
 

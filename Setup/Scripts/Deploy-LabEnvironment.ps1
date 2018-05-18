@@ -6,15 +6,15 @@
 Param(
   [string] [Parameter(Mandatory = $true)] $subscriptionId,
   [string] [Parameter(Mandatory = $true)] $resourceGroupName,
-  [string] [Parameter(Mandatory = $true)] $clusterName,
-  [string] [Parameter(Mandatory = $true)] $clusterCount,
+  [string] [Parameter(Mandatory = $true)] $workspaceName,
+  [string] [Parameter(Mandatory = $true)] $workspaceCount,
   [string] $resourceGroupLocation = 'eastus',
   [switch] $skipLab1
 )
 
 $destContainerName = "databricks-labs"
 $sourceFolder = Get-Location
-$clusterInstanceName = $clusterName
+$workspaceInstanceName = $workspaceName
 $resourceGroupInstanceName = $resourceGroupName
 
 $skipLab1String = "No"
@@ -28,16 +28,16 @@ $Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(500, 25)
 Login-AzureRmAccount 
 
 $sub = Select-AzureRmSubscription -SubscriptionId $subscriptionId
-Write-Host("Deploying instances with prefix " + $clusterInstanceName + " in Resource Group " + $resourceGroupInstanceName + " in subscription " + $sub.Subscription.SubscriptionName + " (" + $sub.Subscription.SubscriptionId + ")")
+Write-Host("Deploying instances with prefix " + $workspaceInstanceName + " in Resource Group " + $resourceGroupInstanceName + " in subscription " + $sub.Subscription.SubscriptionName + " (" + $sub.Subscription.SubscriptionId + ")")
 Set-Location $sourceFolder
 .\Deploy-AzureResourceGroup.ps1 -ResourceGroupName $resourceGroupInstanceName `
   -ResourceGroupLocation $resourceGroupLocation `
   -TemplateFile 'azuredeploy.all.json' `
   -TemplateParametersFile 'azuredeploy.all.parameters.json' `
-  -ClusterName $clusterInstanceName `
-  -ClusterCount $clusterCount `
+  -workspaceName $workspaceInstanceName `
+  -workspaceCount $workspaceCount `
   -SkipLab1 $skipLab1String
-$storageAccountName = $clusterInstanceName
+$storageAccountName = $workspaceInstanceName
 Select-AzureRmSubscription -SubscriptionId $subscriptionId
 
 $storageKey = (Get-AzureRmStorageAccountKey -Name $storageAccountName -ResourceGroupName $resourceGroupInstanceName).Value[0]
@@ -47,10 +47,10 @@ $sourceContainer = "data"
 $sourceSAS = "?sv=2017-04-17&ss=b&srt=co&sp=rl&se=2019-12-31T18:29:33Z&st=2017-09-18T10:29:33Z&spr=https&sig=bw1EJflDFx9NuvLRdBGql8RU%2FC9oz92Dz8Xs76cftJM%3D"
 $contextSource = New-AzureStorageContext -StorageAccountName $sourceAccountName -SasToken $sourceSAS
 
-Write-Host("Creating " + $clusterCount + " storage containers. This can take a while.")
+Write-Host("Creating " + $workspaceCount + " storage containers. This can take a while.")
 $contextDest = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageKey
-For ($i = 0; $i -lt $clusterCount; $i++) {
-  $destContainerName = $clusterName + $i
+For ($i = 0; $i -lt $workspaceCount; $i++) {
+  $destContainerName = $workspaceName + $i
   ### Create a Blob Container in the Storage Account
   New-AzureStorageContainer -Context $contextDest -Name $destContainerName;
     

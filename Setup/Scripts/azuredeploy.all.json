@@ -40,7 +40,7 @@
           "Specifies whether to skip the first lab. If so, lab files are copied automatically and ADF is not provisioned."
       }
     },
-    "clusterName": {
+    "workspaceName": {
       "type": "string",
       "metadata": {
         "description":
@@ -100,19 +100,20 @@
           "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
       }
     },
-    "clusterCount": {
+    "workspaceCount": {
       "type": "int",
       "defaultValue": 1,
       "metadata": {
-        "description": "The number of HDInsight Kafka clusters to deploy."
+        "description":
+          "The number of Databricks workspaces and/or HDInsight Kafka clusters to deploy."
       }
     }
   },
   "variables": {
     "cleanResourcePrefix":
-      "[replace(replace(replace(toLower(parameters('clusterName')), '-', ''), '_', ''), '.', '')]",
-    "clusterAttachedStorageName": "[parameters('clusterName')]",
-    "clusterVNetName": "[concat(parameters('clusterName'),'-vnet')]",
+      "[replace(replace(replace(toLower(parameters('workspaceName')), '-', ''), '_', ''), '.', '')]",
+    "clusterAttachedStorageName": "[parameters('workspaceName')]",
+    "clusterVNetName": "[concat(parameters('workspaceName'),'-vnet')]",
     "clusterVNetAddressSpace": "10.0.0.0/16",
     "clusterVNetSubnetName": "default",
     "clusterVNetSubnetAddressRange": "10.0.0.0/24",
@@ -200,7 +201,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfcopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "identity": {
         "type": "SystemAssigned"
@@ -215,7 +216,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfpipelinecopyretaildatacopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "description":
@@ -352,7 +353,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfretaildataweblogscopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "linkedServiceName": {
@@ -424,7 +425,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfweblogsoutputcopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "linkedServiceName": {
@@ -497,7 +498,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfretaildatauserscopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "linkedServiceName": {
@@ -530,7 +531,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfusersoutputcopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "linkedServiceName": {
@@ -563,7 +564,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adfretaildataproductscopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "linkedServiceName": {
@@ -596,7 +597,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "productsoutputcopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "linkedServiceName": {
@@ -629,7 +630,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adflinkedsourceblobcopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "type": "AzureStorage",
@@ -650,7 +651,7 @@
       "apiVersion": "2017-09-01-preview",
       "copy": {
         "name": "adflinkeddestinationblobcopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "properties": {
         "type": "AzureStorage",
@@ -670,11 +671,11 @@
     // Azure Databricks workspace
     {
       "apiVersion": "2018-04-01",
-      "name": "[concat(parameters('clusterName'), copyIndex())]",
+      "name": "[concat(parameters('workspaceName'), copyIndex())]",
       "condition": "[equals(parameters('provisionSpark'),'Yes')]",
       "copy": {
         "name": "databrickscopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "type": "Microsoft.Databricks/workspaces",
       "location": "[parameters('location')]",
@@ -687,18 +688,18 @@
       },
       "properties": {
         "ManagedResourceGroupId":
-          "[concat(subscription().id, '/resourceGroups/', 'databricks-rg-', parameters('clusterName'), copyIndex(), '-', uniqueString(parameters('clusterName'), resourceGroup().id))]"
+          "[concat(subscription().id, '/resourceGroups/', 'databricks-rg-', parameters('workspaceName'), copyIndex(), '-', uniqueString(parameters('workspaceName'), resourceGroup().id))]"
       }
     },
     // Kafka Cluster
     {
       "apiVersion": "[variables('clusterApiVersion')]",
       "location": "[parameters('location')]",
-      "name": "[concat( 'kf', copyIndex(), parameters('clusterName'))]",
+      "name": "[concat( 'kf', copyIndex(), parameters('workspaceName'))]",
       "condition": "[equals(parameters('provisionKafka'),'Yes')]",
       "copy": {
         "name": "hdinsightkafkacopy",
-        "count": "[parameters('clusterCount')]"
+        "count": "[parameters('workspaceCount')]"
       },
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'kafka'))]",
@@ -727,7 +728,7 @@
               "name":
                 "[concat(variables('clusterAttachedStorageName'),'kafka','.blob.core.windows.net')]",
               "isDefault": true,
-              "container": "[concat(parameters('clusterName'), copyIndex())]",
+              "container": "[concat(parameters('workspaceName'), copyIndex())]",
               "key":
                 "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'kafka')), variables('defaultApiVersion')).key1]"
             }
