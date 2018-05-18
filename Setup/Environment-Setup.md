@@ -2,12 +2,12 @@
 
 This article describes the steps required to setup the environment in order to conduct the labs.
 
-## 1. Deploy the Environment: Databricks Workspace, Azure Data Factory v2, optional HDInsight Kafka Cluster, Attached Storage Accounts, Sample Data
+## 1. Deploy the Environment: Databricks Workspace, Azure Data Factory v2, Attached Storage Accounts, and Sample Data
 
 An ARM template and script is provided to aid in provisioning the clusters for attendees to use. Follow these steps to deploy your cluster:
 
 1.  Navigate to the Setup\Scripts folder.
-1.  Open azuredeploy.all.parameters.json and provide the settings requested. At minimum provide a unique name for the workspace (`workspaceName`). Enter 'Yes' or 'No' for `provisionSpark` and `provisionKafka`. This will specify whether to provision one or more Databricks workspaces (Spark) or HDInsight Kafka set of clusters.
+1.  Open azuredeploy.all.parameters.json and provide the settings requested. At minimum provide a unique name for the workspace (`workspaceName`).
 1.  Save the file.
 1.  Open PowerShell and run the following command to login to your Azure account:
 
@@ -53,11 +53,6 @@ An ARM template and script is provided to aid in provisioning the clusters for a
     * subscription: [user supplied]
     * resource group: [user supplied]
     * pricing tier (Azure Databricks): premium
-    * cluster type: Kafka on Linux HDI 3.6
-    * cluster login username (Kafka): admin
-    * cluster login password (Kafka): Abc!1234567890
-    * ssh username: sshuser
-    * use same password as cluster login: checked
     * location: [eastus]
 
     * primary storage type: Azure Storage
@@ -65,11 +60,6 @@ An ARM template and script is provided to aid in provisioning the clusters for a
     * storage account name: [same value as cluster name]
     * storage account key: [key]
     * default container: [workspaceName + ##]
-
-    * number of worker nodes: 2
-    * worker node size: D12 v2
-    * head node size: D12 v2
-      (will use 16 cores)
     ```
 
 ## 2. Create and Run a new Azure Databricks Cluster
@@ -94,9 +84,7 @@ An ARM template and script is provided to aid in provisioning the clusters for a
 
 **Note:** This section only applies if you are skipping Lab 1 (using the `-skipLab1` switch)
 
-For each cluster, the script takes care of creating a new storage account, creating the default container in it and copying the sample data into that container. After the copy has completed, your clusters will contain a copy of the retaildata files underneath the path /retaildata in the default storage container for the cluster.
-
-For each cluster, the script takes care of creating a new storage account, creating the default container in it and copying the sample data into that container. After the copy has completed, your clusters will contain a copy of the retaildata files underneath the path /retaildata in the default storage container for the cluster.
+For each Azure Databricks workspace, the script takes care of creating a new storage account, creating the default container in it and copying the sample data into that container. After the copy has completed, your workspaces will have access to a copy of the retaildata files underneath the path /retaildata in the storage container created for the workspace.
 
 The retaildata source files are currently available at the following location, accessed with a SAS token.
 

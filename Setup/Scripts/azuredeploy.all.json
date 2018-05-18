@@ -14,23 +14,6 @@
         "Premium_LRS"
       ]
     },
-    "provisionSpark": {
-      "type": "string",
-      "defaultValue": "Yes",
-      "allowedValues": ["Yes", "No"],
-      "metadata": {
-        "description":
-          "Specifies whether to provision an Azure Databricks Spark workspace."
-      }
-    },
-    "provisionKafka": {
-      "type": "string",
-      "defaultValue": "Yes",
-      "allowedValues": ["Yes", "No"],
-      "metadata": {
-        "description": "Specifies whether to provision a Kafka cluster."
-      }
-    },
     "skipLab1": {
       "type": "string",
       "defaultValue": "Yes",
@@ -43,8 +26,7 @@
     "workspaceName": {
       "type": "string",
       "metadata": {
-        "description":
-          "The name of the Azure Databricks workspace and/or HDInsight cluster to create."
+        "description": "The name of the Azure Databricks workspace to create."
       }
     },
     "pricingTier": {
@@ -55,21 +37,6 @@
         "description": "The pricing tier of Databricks workspace."
       }
     },
-    "clusterLoginUserName": {
-      "type": "string",
-      "defaultValue": "admin",
-      "metadata": {
-        "description":
-          "These credentials can be used to submit jobs to the Kafka cluster and to log into cluster dashboards."
-      }
-    },
-    "clusterLoginPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description":
-          "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
-      }
-    },
     "location": {
       "type": "string",
       "defaultValue": "westus2",
@@ -78,34 +45,11 @@
           "The location where all azure resources will be deployed."
       }
     },
-    "clusterVersion": {
-      "type": "string",
-      "defaultValue": "3.6",
-      "metadata": {
-        "description": "HDInsight Kafka cluster version."
-      }
-    },
-    "sshUserName": {
-      "type": "string",
-      "defaultValue": "sshuser",
-      "metadata": {
-        "description":
-          "These credentials can be used to remotely access the Kafka cluster."
-      }
-    },
-    "sshPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description":
-          "The password must be at least 10 characters in length and must contain at least one digit, one non-alphanumeric character, and one upper or lower case letter."
-      }
-    },
     "workspaceCount": {
       "type": "int",
       "defaultValue": 1,
       "metadata": {
-        "description":
-          "The number of Databricks workspaces and/or HDInsight Kafka clusters to deploy."
+        "description": "The number of Databricks workspaces to deploy."
       }
     }
   },
@@ -113,12 +57,6 @@
     "cleanResourcePrefix":
       "[replace(replace(replace(toLower(parameters('workspaceName')), '-', ''), '_', ''), '.', '')]",
     "clusterAttachedStorageName": "[parameters('workspaceName')]",
-    "clusterVNetName": "[concat(parameters('workspaceName'),'-vnet')]",
-    "clusterVNetAddressSpace": "10.0.0.0/16",
-    "clusterVNetSubnetName": "default",
-    "clusterVNetSubnetAddressRange": "10.0.0.0/24",
-    "defaultApiVersion": "2015-05-01-preview",
-    "clusterApiVersion": "2015-03-01-preview",
     "dataFactoryName":
       "[concat(variables('cleanResourcePrefix'), 'adf', uniqueString(resourceGroup().id))]",
     "factoryId":
@@ -155,42 +93,6 @@
         "displayName": "clusterattachedstorage"
       },
       "kind": "Storage"
-    },
-    {
-      "name": "[concat(variables('clusterAttachedStorageName'),'kafka')]",
-      "condition": "[equals(parameters('provisionKafka'),'Yes')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "location": "[parameters('location')]",
-      "apiVersion": "2016-01-01",
-      "sku": {
-        "name": "[parameters('clusterAttachedStorageType')]"
-      },
-      "dependsOn": [],
-      "tags": {
-        "displayName": "clusterattachedstorage"
-      },
-      "kind": "Storage"
-    },
-    {
-      "name": "[variables('clusterVNetName')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "[variables('defaultApiVersion')]",
-      "dependsOn": [],
-      "tags": {},
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": ["[variables('clusterVNetAddressSpace')]"]
-        },
-        "subnets": [
-          {
-            "name": "[variables('clusterVNetSubnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('clusterVNetSubnetAddressRange')]"
-            }
-          }
-        ]
-      }
     },
     // Azure Data Factory
     {
@@ -672,7 +574,6 @@
     {
       "apiVersion": "2018-04-01",
       "name": "[concat(parameters('workspaceName'), copyIndex())]",
-      "condition": "[equals(parameters('provisionSpark'),'Yes')]",
       "copy": {
         "name": "databrickscopy",
         "count": "[parameters('workspaceCount')]"
@@ -680,8 +581,7 @@
       "type": "Microsoft.Databricks/workspaces",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/',variables('clusterVNetName'))]"
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('clusterAttachedStorageName'))]"
       ],
       "sku": {
         "name": "[parameters('pricingTier')]"
@@ -690,122 +590,6 @@
         "ManagedResourceGroupId":
           "[concat(subscription().id, '/resourceGroups/', 'databricks-rg-', parameters('workspaceName'), copyIndex(), '-', uniqueString(parameters('workspaceName'), resourceGroup().id))]"
       }
-    },
-    // Kafka Cluster
-    {
-      "apiVersion": "[variables('clusterApiVersion')]",
-      "location": "[parameters('location')]",
-      "name": "[concat( 'kf', copyIndex(), parameters('workspaceName'))]",
-      "condition": "[equals(parameters('provisionKafka'),'Yes')]",
-      "copy": {
-        "name": "hdinsightkafkacopy",
-        "count": "[parameters('workspaceCount')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'kafka'))]",
-        "[concat('Microsoft.Network/virtualNetworks/',variables('clusterVNetName'))]"
-      ],
-      "type": "Microsoft.HDInsight/clusters",
-      "properties": {
-        "clusterVersion": "[parameters('clusterVersion')]",
-        "osType": "Linux",
-        "tier": "standard",
-        "clusterDefinition": {
-          "kind": "kafka",
-          "configurations": {
-            "gateway": {
-              "restAuthCredential.isEnabled": true,
-              "restAuthCredential.username":
-                "[parameters('clusterLoginUserName')]",
-              "restAuthCredential.password":
-                "[parameters('clusterLoginPassword')]"
-            }
-          }
-        },
-        "storageProfile": {
-          "storageaccounts": [
-            {
-              "name":
-                "[concat(variables('clusterAttachedStorageName'),'kafka','.blob.core.windows.net')]",
-              "isDefault": true,
-              "container": "[concat(parameters('workspaceName'), copyIndex())]",
-              "key":
-                "[listKeys(resourceId('Microsoft.Storage/storageAccounts', concat(variables('clusterAttachedStorageName'),'kafka')), variables('defaultApiVersion')).key1]"
-            }
-          ]
-        },
-        "computeProfile": {
-          "roles": [
-            {
-              "name": "headnode",
-              "minInstanceCount": 1,
-              "targetInstanceCount": 2,
-              "hardwareProfile": {
-                "vmSize": "Standard_D12_V2"
-              },
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "username": "[parameters('sshUserName')]",
-                  "password": "[parameters('sshPassword')]"
-                }
-              },
-              "virtualNetworkProfile": {
-                "id":
-                  "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
-                "subnet":
-                  "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
-              }
-            },
-            {
-              "name": "workernode",
-              "minInstanceCount": 1,
-              "targetInstanceCount": 3,
-              "hardwareProfile": {
-                "vmSize": "Standard_D12_V2"
-              },
-              "dataDisksGroups": [
-                {
-                  "disksPerNode": 2
-                }
-              ],
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "username": "[parameters('sshUserName')]",
-                  "password": "[parameters('sshPassword')]"
-                }
-              },
-              "virtualNetworkProfile": {
-                "id":
-                  "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
-                "subnet":
-                  "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
-              }
-            },
-            {
-              "name": "zookeepernode",
-              "minInstanceCount": 1,
-              "targetInstanceCount": 3,
-              "hardwareProfile": {
-                "vmSize": "Medium"
-              },
-              "osProfile": {
-                "linuxOperatingSystemProfile": {
-                  "username": "[parameters('sshUserName')]",
-                  "password": "[parameters('sshPassword')]"
-                }
-              },
-              "virtualNetworkProfile": {
-                "id":
-                  "[resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName'))]",
-                "subnet":
-                  "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('clusterVNetName')), '/subnets/', variables('clusterVNetSubnetName'))]"
-              }
-            }
-          ]
-        }
-      },
-      "tags": {},
-      "type": "Microsoft.HDInsight/clusters"
     }
   ],
   "outputs": {}
