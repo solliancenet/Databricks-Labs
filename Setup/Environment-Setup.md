@@ -19,8 +19,8 @@ An ARM template and script is provided to aid in provisioning the clusters for a
 
     1.  subscriptionId (Mandatory)
     2.  resourceGroupName (Mandatory)
-    3.  clusterName (Mandatory)
-    4.  clusterCount (Mandatory)
+    3.  workspaceName (Mandatory)
+    4.  workspaceCount (Mandatory)
     5.  resourceGroupLocation (Default value = 'eastus')
     6.  skipLab1 (optional switch)
 
