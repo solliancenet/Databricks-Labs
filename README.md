@@ -32,7 +32,7 @@ In this lab, you will train a recommendation model using Spark's built-in collab
 
 AdventureWorks has asked for the ability to extend their product recommendations feature, integrating the trained Alternating Least Squares (ALS) recommendation model to make predictions against streaming weblog data.
 
-In this lab, you will upload and run a Java .jar application to add sample weblog data into a Kafka topic, and use the same application to view the data added. You will then create a simple Kafka producer using Spark to add a few more records to the topic. Next, you will use Spark Structured Streaming to query the data, and run the streamed data against the ALS recommendation model, getting product recommendations for a given user.
+In this lab, you will use Spark Structured Streaming to query the data, and run the streamed data against the ALS recommendation model, getting product recommendations for a given user.
 
 ## Cleanup
 
