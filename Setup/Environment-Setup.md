@@ -6,15 +6,31 @@ This article describes the steps required to setup the environment in order to c
 
 An ARM template and script is provided to aid in provisioning the clusters for attendees to use. Follow these steps to deploy your cluster:
 
-1.  Navigate to the Setup\Scripts folder.
-1.  Open azuredeploy.all.parameters.json and provide the settings requested. At minimum provide a unique name for the workspace (`workspaceName`).
-1.  Save the file.
 1.  Open PowerShell and run the following command to login to your Azure account:
 
     ```PowerShell
     Login-AzureRmAccount
     ```
 
+1.  If you have more than one Azure subscription, execute the following to view your list of available subscriptions:
+
+    ```PowerShell
+    Get-AzureRmSubscription
+    ```
+
+1.  Execute the following to set the subscription to the appropriate one, if needed:
+
+    ```PowerShell
+    Select-AzureRmSubscription -SubscriptionName "<NAME>"
+    ```
+
+1.  Confirm your default environment:
+
+    ```PowerShell
+    (Get-AzureRmContext).Subscription
+    ```
+
+1.  In PowerShell, navigate to the Setup\Scripts folder.
 1.  Next, you will execute the `.\Deploy-LabEnvironment.ps1` PowerShell script, passing in the following parameters:
 
     1.  subscriptionId (Mandatory)
@@ -77,6 +93,7 @@ An ARM template and script is provided to aid in provisioning the clusters for a
     1.  Worker Type: Default value (same for Min Workers and Max Workers)
     1.  Auto Termination: Check the box and set to 120 minutes of inactivity
 1.  **Important:** Edit the Spark Config by entering the connection information for your Azure Storage account. This will allow your cluster to access the lab files. You will find the init configuration value at the bottom of the PowerShell output after executing the `Deploy-LabEnvironment.ps1` script. The string should look similar to the following: `spark.hadoop.fs.azure.account.key.mydatabrickslab.blob.core.windows.net 8/jR7FXwkajLPObf8OOETzuiJxaIiI6B6z0m8euneUe0DgX/TnGHoywMw25kYdyTk/ap0eZ2PsQhXfE/E5d2Kg==`, where `mydatabrickslab` is your Azure Storage account name (matches the `workspaceName` value), and `8/jR7FXwkajLPObf8OOETzuiJxaIiI6B6z0m8euneUe0DgX/TnGHoywMw25kYdyTk/ap0eZ2PsQhXfE/E5d2Kg==` is your storage access key.
+1.  Select **Create Cluster**
 
 **Note:** Your lab files will be copied to a container created in the storage account with the following naming convention: {STORAGE-ACCOUNT-NAME}+{WORKSPACE-COUNT}. The default {WORKSPACE-COUNT} value is 0 when you specify 1 for the `workspaceCount` parameter. If creating multiple workspaces for a classroom environment, be sure to assign a number to each student and have them use that corresponding number that is appended to the end of their Azure Databricks workspace name, HDInsight Kafka cluster name, and the end of the container name within the lab's Azure Storage account.
 
